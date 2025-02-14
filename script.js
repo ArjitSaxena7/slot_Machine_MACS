@@ -24,13 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // Calculate the final stopping position
         const targetPosition = -(totalSpins * totalItems + stopIndex) * itemHeight;
 
-        let velocity = Math.floor(Math.random() * (220 - 30 + 1)) + 30; // Random speed // acutally this is not random coz 220 and 30 are given by me
+        // Calculate velocity based on the number of images, stopping index, and total spins
+        const baseVelocity = totalItems * 10; // Adjust the multiplier as needed
+        const spinFactor = Math.random() * totalSpins + stopIndex; // Combine randomness
+        let velocity = Math.floor(Math.random() * baseVelocity) + spinFactor; // Minimum speed + random spin factor
 
         function animate() {
             position -= velocity;
-            
+
             slotItems.style.transform = `translateY(${position}px)`;
-            
+
             // Gradually slow down
             if (velocity > 1) {
                 velocity *= 0.96; // Smooth deceleration
@@ -39,16 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Snap to exact image position
                 position = -stopIndex * itemHeight;
                 slotItems.style.transform = `translateY(${position}px)`;
-                
+
                 isSpinning = false;
                 spinButton.disabled = false;
-                spinButton.textContent = "Spinning";
+                spinButton.textContent = "Spin";
             }
         }
-        
+
         animate();
-        //alert(`Result: ${stopIndex + 1}`);              //use this line to check if the function is random.
-        
     }
 
     spinButton.addEventListener("click", spin);
