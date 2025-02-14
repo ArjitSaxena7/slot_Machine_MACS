@@ -1,6 +1,58 @@
-
-body {
-    text-align: center;
+.container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
     font-family: Arial, sans-serif;
-    margin-top: 50px;
-}
+  }
+
+  .slot-window {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+  }
+
+  .slot-items {
+    position: absolute;
+    width: 100%;
+    transition: transform 5s cubic-bezier(0.3, 0.1, 0.3, 1.0);
+    transform: translateY(-800px);
+  }
+
+  .slot-item {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slot-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+
+  .spin-button {
+    padding: 15px 40px;
+    font-size: 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  .spin-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  .spin-button:active:not(:disabled) {
+    transform: scale(0.95);
+  }
